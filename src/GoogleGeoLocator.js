@@ -8,9 +8,9 @@ class GoogleGeoLocator extends GeoLocatorBase {
     try {
       const position = await this.getCurrentPosition(considerIp);
       this.log(position);
+
     } catch(e) {
-      alert('現在地を取得できませんでした。');
-      console.error(e);
+      this.logNotLocatedError(e);
     }
   }
 

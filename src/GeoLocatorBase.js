@@ -20,6 +20,11 @@ class GeoLocatorBase {
     `);
   }
 
+  logNotLocatedError(error) {
+    alert('現在地を取得できませんでした。');
+    console.error(e);
+  }
+
   /**
    * エラーログを出力
    * @param {string} message 

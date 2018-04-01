@@ -15,8 +15,7 @@ class BrowserGeoLocator extends GeoLocatorBase {
       this.log(position);
 
     } catch(e) {
-      alert('現在地を取得できませんでした。');
-      console.error(e);
+      this.logNotLocatedError(e);
     }
   }
 
