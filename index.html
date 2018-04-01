@@ -8,7 +8,9 @@
   </head>
   <body>
     <div>
-      <input type="button" value="Browser Geolocation API で現在地を取得" onclick="locateByBrowserGeolocationApi();">
+      <input type="button" value="Browser Geolocation API で現在地を取得" onclick="locateByBrowserGeolocationApi();"><br>
+      <input type="button" value="Google GeoLocation API で現在地を取得" onclick="locateByGoogleGeolocationApi(true);">
+      <input type="button" value="Google GeoLocation API で現在地を取得（IPでの検索無し）" onclick="locateByGoogleGeolocationApi(false);">
     </div>
     <div id="log"></div>
   </body>

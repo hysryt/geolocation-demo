@@ -89,7 +89,7 @@ eval("var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!\n * jQ
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const GeoLocatorBase = __webpack_require__(/*! ./GeoLocatorBase */ \"./src/GeoLocatorBase.js\");\n\n/**\n * ブラウザの Geolocation API で現在地を取得するクラス\n */\nclass BrowserGeoLocator extends GeoLocatorBase {\n  async locate() {\n    if (! navigator.geolocation) {\n      this.logError(\"ブラウザが Geolocation API に対応していません。\");\n      return; \n    }\n\n    try {\n      const position = await this.getCurrentPosition();\n      this.log(position);\n\n    } catch(e) {\n      alert('現在地を取得できませんでした。');\n      console.error(e);\n    }\n  }\n\n  get name() {\n    return 'Browser Geolocation API';\n  }\n\n  log(position) {\n    super.log(\n      position.coords.latitude\n      , position.coords.longitude\n      , position.coords.accuracy\n    );\n  }\n\n  /**\n   * 現在地を取得する。\n   * タイムアウトの時間計測は、ユーザにGPS使用確認ダイアログを表示した時点から始まるので、\n   * ユーザの操作が遅いとタイムアウト扱いになってしまう点に注意。\n   */\n  async getCurrentPosition() {\n    const options = {\n      enableHighAccuracy: true,\n      timeout: 5000,\n      maximumAge: 0,\n    };\n\n    return new Promise(function(resolve, reject) {\n      navigator.geolocation.getCurrentPosition(resolve, reject, options);\n    });\n  }\n}\n\nmodule.exports = BrowserGeoLocator;\n\n//# sourceURL=webpack:///./src/BrowserGeoLocator.js?");
+eval("const GeoLocatorBase = __webpack_require__(/*! ./GeoLocatorBase */ \"./src/GeoLocatorBase.js\");\n\n/**\n * ブラウザの Geolocation API で現在地を取得するクラス\n */\nclass BrowserGeoLocator extends GeoLocatorBase {\n  async locate() {\n    if (! navigator.geolocation) {\n      this.logError(\"ブラウザが Geolocation API に対応していません。\");\n      return; \n    }\n\n    try {\n      const position = await this.getCurrentPosition();\n      this.log(position);\n\n    } catch(e) {\n      alert('現在地を取得できませんでした。');\n      console.error(e);\n    }\n  }\n\n  get name() {\n    return 'Browser Geolocation API';\n  }\n\n  log(position) {\n    super.log(\n      position.coords.latitude\n      , position.coords.longitude\n      , position.coords.accuracy\n    );\n  }\n\n  /**\n   * 現在地を取得する。\n   * タイムアウトの時間計測は、ユーザにGPS使用確認ダイアログを表示した時点から始まるので、\n   * ユーザの操作が遅いとタイムアウト扱いになってしまう点に注意。\n   */\n  async getCurrentPosition() {\n    const options = {\n      enableHighAccuracy: true,\n      timeout: 10000,\n      maximumAge: 0,\n    };\n\n    return new Promise(function(resolve, reject) {\n      navigator.geolocation.getCurrentPosition(resolve, reject, options);\n    });\n  }\n}\n\nmodule.exports = BrowserGeoLocator;\n\n//# sourceURL=webpack:///./src/BrowserGeoLocator.js?");
 
 /***/ }),
 
@@ -104,6 +104,17 @@ eval("const $ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/j
 
 /***/ }),
 
+/***/ "./src/GoogleGeoLocator.js":
+/*!*********************************!*\
+  !*** ./src/GoogleGeoLocator.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("const $ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\nconst GeoLocatorBase = __webpack_require__(/*! ./GeoLocatorBase */ \"./src/GeoLocatorBase.js\");\n\nconst API_KEY = 'AIzaSyDFx6VAGa_x0GiGaROvl0-Q9XhqbKZbvqc';\n\nclass GoogleGeoLocator extends GeoLocatorBase {\n  async locate(considerIp) {\n    try {\n      const position = await this.getCurrentPosition(considerIp);\n      this.log(position);\n    } catch(e) {\n      alert('現在地を取得できませんでした。');\n      console.error(e);\n    }\n  }\n\n  getCurrentPosition(considerIp) {\n    return new Promise((resolve, reject) => {\n      $.ajax({\n        url: this.url,\n        type: 'POST',\n        contentType: 'application/json',\n        data: `{\n          considerIp: ${(considerIp + '')}\n        }`,\n      }).done(resolve).fail(reject);\n    })\n  }\n\n  log(position) {\n    super.log(\n      position.location.lat\n      , position.location.lng\n      , position.accuracy\n    );\n  }\n\n  get url() {\n    return 'https://www.googleapis.com/geolocation/v1/geolocate?key=' + API_KEY;\n  }\n\n  get name() {\n    return 'Google GeoLocation API';\n  }\n}\n\nmodule.exports = GoogleGeoLocator;\n\n//# sourceURL=webpack:///./src/GoogleGeoLocator.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -111,7 +122,7 @@ eval("const $ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/j
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const BrowserGeoLocator = __webpack_require__(/*! ./BrowserGeoLocator */ \"./src/BrowserGeoLocator.js\");\n\nconst locator = new BrowserGeoLocator();\n\n/**\n * ブラウザの Geolocation API で現在地を取得\n */\nwindow.locateByBrowserGeolocationApi = function() {\n  locator.locate();\n}\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("const BrowserGeoLocator = __webpack_require__(/*! ./BrowserGeoLocator */ \"./src/BrowserGeoLocator.js\");\nconst GoogleGeoLocator = __webpack_require__(/*! ./GoogleGeoLocator */ \"./src/GoogleGeoLocator.js\");\n\nconst browserLocator = new BrowserGeoLocator();\nconst googleLocator = new GoogleGeoLocator();\n\n/**\n * ブラウザの Geolocation API で現在地を取得\n */\nwindow.locateByBrowserGeolocationApi = function() {\n  browserLocator.locate();\n}\n\nwindow.locateByGoogleGeolocationApi = function(considerIp) {\n  googleLocator.locate(considerIp);\n}\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 
