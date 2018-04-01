@@ -24,7 +24,7 @@ class GeoLocatorBase {
 
   logNotLocatedError(error) {
     alert('現在地を取得できませんでした。');
-    console.error(e);
+    console.error(error);
   }
 
   /**
