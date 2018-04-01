@@ -40,7 +40,7 @@ class GeoLocatorBase {
 
     const map = new google.maps.Map(document.getElementById('map'), {
       center: position,
-      zoom: 13
+      zoom: 10
     });
 
     new google.maps.Marker({ position, map });
