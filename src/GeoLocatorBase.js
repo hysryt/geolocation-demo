@@ -18,6 +18,8 @@ class GeoLocatorBase {
       経度：${lng}<br>
       精度：${accuracy}m
     `);
+
+    this.setPositionToMap(lat, lng);
   }
 
   logNotLocatedError(error) {
@@ -31,6 +33,17 @@ class GeoLocatorBase {
    */
   logError(message) {
     console.log(message);
+  }
+
+  setPositionToMap(lat, lng) {
+    const position = {lat, lng};
+
+    const map = new google.maps.Map(document.getElementById('map'), {
+      center: position,
+      zoom: 8
+    });
+
+    new google.maps.Marker({ position, map });
   }
 }
 

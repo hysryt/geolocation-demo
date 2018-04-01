@@ -4,10 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>現在地取得デモ</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY39Uupgw_3_IvatyltmO02O21Tf_6xQg"
+    async defer></script>
     <script src="dist/main.js" defer></script>
     <style>
       button {
         margin-bottom: 0.5rem;
+      }
+
+      #map {
+        background-color: #eee;
+        height: 60vh;
       }
     </style>
   </head>
@@ -17,6 +24,7 @@
       <button onclick="locateByGoogleGeolocationApi(true);">Google GeoLocation API で現在地を取得</button><br>
       <button onclick="locateByGoogleGeolocationApi(false);">Google GeoLocation API で現在地を取得<br>（IPでの検索無し）</button>
     </div>
+    <div id="map"></div>
     <div id="log"></div>
   </body>
 </html>
