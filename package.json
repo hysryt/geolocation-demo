@@ -11,5 +11,8 @@
   "scripts": {
     "build": "webpack --mode=development",
     "watch": "webpack --mode=development --watch"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1"
   }
 }
