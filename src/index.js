@@ -11,6 +11,9 @@ window.locateByBrowserGeolocationApi = function() {
   browserLocator.locate();
 }
 
+/**
+ * Google の Geolocation API で現在地を取得
+ */
 window.locateByGoogleGeolocationApi = function(considerIp) {
   googleLocator.locate(considerIp);
 }

@@ -122,7 +122,7 @@ eval("const $ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/j
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const BrowserGeoLocator = __webpack_require__(/*! ./BrowserGeoLocator */ \"./src/BrowserGeoLocator.js\");\nconst GoogleGeoLocator = __webpack_require__(/*! ./GoogleGeoLocator */ \"./src/GoogleGeoLocator.js\");\n\nconst browserLocator = new BrowserGeoLocator();\nconst googleLocator = new GoogleGeoLocator();\n\n/**\n * ブラウザの Geolocation API で現在地を取得\n */\nwindow.locateByBrowserGeolocationApi = function() {\n  browserLocator.locate();\n}\n\nwindow.locateByGoogleGeolocationApi = function(considerIp) {\n  googleLocator.locate(considerIp);\n}\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("const BrowserGeoLocator = __webpack_require__(/*! ./BrowserGeoLocator */ \"./src/BrowserGeoLocator.js\");\nconst GoogleGeoLocator = __webpack_require__(/*! ./GoogleGeoLocator */ \"./src/GoogleGeoLocator.js\");\n\nconst browserLocator = new BrowserGeoLocator();\nconst googleLocator = new GoogleGeoLocator();\n\n/**\n * ブラウザの Geolocation API で現在地を取得\n */\nwindow.locateByBrowserGeolocationApi = function() {\n  browserLocator.locate();\n}\n\n/**\n * Google の Geolocation API で現在地を取得\n */\nwindow.locateByGoogleGeolocationApi = function(considerIp) {\n  googleLocator.locate(considerIp);\n}\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 
